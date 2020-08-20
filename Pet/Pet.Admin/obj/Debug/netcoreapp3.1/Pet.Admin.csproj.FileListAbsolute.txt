@@ -1,0 +1,9 @@
+D:\Documents\GitHub\Pet\Pet\Pet.Admin\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\Documents\GitHub\Pet\Pet\Pet.Admin\bin\Debug\netcoreapp3.1\appsettings.json
+D:\Documents\GitHub\Pet\Pet\Pet.Admin\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+D:\Documents\GitHub\Pet\Pet\Pet.Admin\obj\Debug\netcoreapp3.1\Pet.Admin.csprojAssemblyReference.cache
+D:\Documents\GitHub\Pet\Pet\Pet.Admin\obj\Debug\netcoreapp3.1\Pet.Admin.AssemblyInfoInputs.cache
+D:\Documents\GitHub\Pet\Pet\Pet.Admin\obj\Debug\netcoreapp3.1\Pet.Admin.AssemblyInfo.cs
+D:\Documents\GitHub\Pet\Pet\Pet.Admin\obj\Debug\netcoreapp3.1\Pet.Admin.RazorTargetAssemblyInfo.cache
+D:\Documents\GitHub\Pet\Pet\Pet.Admin\obj\Debug\netcoreapp3.1\staticwebassets\Pet.Admin.StaticWebAssets.Manifest.cache
+D:\Documents\GitHub\Pet\Pet\Pet.Admin\obj\Debug\netcoreapp3.1\staticwebassets\Pet.Admin.StaticWebAssets.xml
