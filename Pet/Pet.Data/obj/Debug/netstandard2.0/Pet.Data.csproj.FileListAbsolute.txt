@@ -2,3 +2,4 @@ D:\Documents\GitHub\Pet\Pet\Pet.Data\bin\Debug\netstandard2.0\Pet.Data.deps.json
 D:\Documents\GitHub\Pet\Pet\Pet.Data\bin\Debug\netstandard2.0\Pet.Data.dll
 D:\Documents\GitHub\Pet\Pet\Pet.Data\obj\Debug\netstandard2.0\Pet.Data.AssemblyInfoInputs.cache
 D:\Documents\GitHub\Pet\Pet\Pet.Data\obj\Debug\netstandard2.0\Pet.Data.AssemblyInfo.cs
+D:\Documents\GitHub\Pet\Pet\Pet.Data\obj\Debug\netstandard2.0\Pet.Data.csprojAssemblyReference.cache
