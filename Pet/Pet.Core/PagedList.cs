@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Pet.Core
 {
-    public class PagedList<T> : List<T>, IPageList<T>
+    public class PagedList<T> : IPageList<T>
     {
 
         public PagedList(IQueryable<T> source, int pageIndex, int pageSize, bool getOnlyTotalCount = false)
@@ -21,7 +21,7 @@ namespace Pet.Core
             PageIndex = PageIndex;
             if (getOnlyTotalCount)
                 return;
-            AddRange(source.Skip(pageIndex * pageSize).Take(pageSize).ToList());
+            List = (source.Skip(pageIndex * pageSize).Take(pageSize).ToList());
         }
 
         /// <summary>
@@ -30,9 +30,16 @@ namespace Pet.Core
         /// <param name="source">source</param>
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
-        public PagedList(IList<T> source, int pageIndex, int pageSize)
+        public PagedList(IQueryable<T> source, int pageIndex, int pageSize, int totalCount)
         {
-            TotalCount = source.Count;
+            if (totalCount > 0 && pageIndex > 1)
+            {
+                TotalCount = totalCount;
+            }
+            else
+            {
+                TotalCount = source.Count();
+            }
             TotalPages = TotalCount / pageSize;
 
             if (TotalCount % pageSize > 0)
@@ -40,7 +47,7 @@ namespace Pet.Core
 
             PageSize = pageSize;
             PageIndex = pageIndex;
-            AddRange(source.Skip(pageIndex * pageSize).Take(pageSize).ToList());
+            List = (source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList());
         }
 
         public PagedList(IEnumerable<T> source, int pageIndex, int pageSize, int totalCount)
@@ -53,7 +60,7 @@ namespace Pet.Core
 
             PageSize = pageSize;
             PageIndex = pageIndex;
-            AddRange(source);
+            List = source.ToList();
         }
 
         public int PageIndex { get; set; }
@@ -64,5 +71,7 @@ namespace Pet.Core
         public bool HasPreviousPage => PageIndex > 0;
 
         public bool HasNextPage => PageIndex + 1 < TotalPages;
+
+        public List<T> List { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pet.Core.Enums.Domain.Identity;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,8 @@ namespace Pet.Core.Domain.Identity
 {
     public class AppUser : BaseEntity
     {
+        public AppUserTypeStauts UserType { get; set; }
+
         public string Name { get; set; }
 
         public string NickName { get; set; }

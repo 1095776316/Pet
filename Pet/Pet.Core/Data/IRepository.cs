@@ -1,27 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Pet.Core.Data
 {
     public interface IRepository<T> where T : BaseEntity
     {
-        T GetById(object id);
+        Task<T> GetByIdAsync(object id);
 
+        Task InsertAsync(T entity);
 
-        void Insert(T entity);
+        Task InsertAsync(IEnumerable<T> entities);
 
-        void Insert(IEnumerable<T> entities);
+        Task UpdateAsync(T entity);
 
-        void Update(T entity);
+        Task UpdateAsync(IEnumerable<T> entities);
 
-        void Update(IEnumerable<T> entities);
+        Task DeleteAsync(T entity);
 
-        void Delete(IEnumerable<T> entities);
+        Task DeleteAsync(List<T> entities);
 
-        IQueryable<T> Table { get; set; }
+        Task<IEnumerable<T>> GetList();
 
-        IQueryable<T> TableNoTracking { get; set; }
+        Task<List<T>> GetListAsync(Expression<Func<T, bool>> expression);
+
+        IQueryable<T> Table { get; }
+
+        IQueryable<T> TableNoTracking { get; }
+
+        Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
     }
 }

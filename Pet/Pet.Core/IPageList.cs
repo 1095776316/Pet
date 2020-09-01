@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Pet.Core
 {
-    public interface IPageList<T> : IList<T>
+    public interface IPageList<T> 
     {
+        List<T> List { get; set; }
+
         int PageIndex { get; set; }
 
         int PageSize { get; set; }

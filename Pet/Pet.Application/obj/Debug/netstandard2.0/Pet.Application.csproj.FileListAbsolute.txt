@@ -1,0 +1,16 @@
+D:\Documents\GitHub\Pet\Pet\Pet.Application\bin\Debug\netstandard2.0\Pet.Application.deps.json
+D:\Documents\GitHub\Pet\Pet\Pet.Application\bin\Debug\netstandard2.0\Pet.Application.dll
+D:\Documents\GitHub\Pet\Pet\Pet.Application\bin\Debug\netstandard2.0\Pet.Application.pdb
+D:\Documents\GitHub\Pet\Pet\Pet.Application\bin\Debug\netstandard2.0\Pet.Core.dll
+D:\Documents\GitHub\Pet\Pet\Pet.Application\bin\Debug\netstandard2.0\Pet.Core.pdb
+D:\Documents\GitHub\Pet\Pet\Pet.Application\bin\Debug\netstandard2.0\en-us\Pet.Core.resources.dll
+D:\Documents\GitHub\Pet\Pet\Pet.Application\bin\Debug\netstandard2.0\ja\Pet.Core.resources.dll
+D:\Documents\GitHub\Pet\Pet\Pet.Application\bin\Debug\netstandard2.0\ko\Pet.Core.resources.dll
+D:\Documents\GitHub\Pet\Pet\Pet.Application\bin\Debug\netstandard2.0\zh-CN\Pet.Core.resources.dll
+D:\Documents\GitHub\Pet\Pet\Pet.Application\obj\Debug\netstandard2.0\Pet.Application.csprojAssemblyReference.cache
+D:\Documents\GitHub\Pet\Pet\Pet.Application\obj\Debug\netstandard2.0\Pet.Application.AssemblyInfoInputs.cache
+D:\Documents\GitHub\Pet\Pet\Pet.Application\obj\Debug\netstandard2.0\Pet.Application.AssemblyInfo.cs
+D:\Documents\GitHub\Pet\Pet\Pet.Application\obj\Debug\netstandard2.0\Pet.Application.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\Pet\Pet\Pet.Application\obj\Debug\netstandard2.0\Pet.Application.csproj.CopyComplete
+D:\Documents\GitHub\Pet\Pet\Pet.Application\obj\Debug\netstandard2.0\Pet.Application.dll
+D:\Documents\GitHub\Pet\Pet\Pet.Application\obj\Debug\netstandard2.0\Pet.Application.pdb

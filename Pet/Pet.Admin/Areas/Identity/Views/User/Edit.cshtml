@@ -1,0 +1,147 @@
+﻿@model Pet.Core.Models.Users.UserDto
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+}
+<div class="layui-fluid">
+    <div class="layui-row">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label for="Name" class="layui-form-label">
+                    @L["Name"]
+                </label>
+                <div class="layui-input-inline">
+                    <select>
+                        @foreach (SelectListItem item in ViewBag.UserTypes as List<SelectListItem>)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="Name" class="layui-form-label">
+                    @L["Name"]
+                </label>
+                <div class="layui-input-inline">
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    <input type="text" id="Name" name="Name"
+                           required="" lay-verify="required"
+                           autocomplete="off" class="layui-input"
+                           value="@Model.Name">
+                </div>
+                <div class="layui-form-mid layui-word-aux">@L["{0}-{1}NameCharacters", 2, 20]</div>
+            </div>
+            <div class="layui-form-item">
+                <label for="NickName" class="layui-form-label">
+                    @L["NickName"]
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text"
+                           id="NickName"
+                           name="NickName"
+                           required=""
+                           autocomplete="off"
+                           class="layui-input"
+                           value="@Model.NickName">
+                </div>
+            </div>
+            @*<div class="layui-form-item">
+            <label for="Email" class="layui-form-label">
+                @L["Email"]
+            </label>
+            <div class="layui-input-inline">
+                <input type="text"
+                       id="Email"
+                       name="Email"
+                       lay-verify="email"
+                       autocomplete="off"
+                       class="layui-input"
+                       value="@Model.Eamil">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="Email" class="layui-form-label">
+                @L["PhoneNumber"]
+            </label>
+            <div class="layui-input-inline">
+                <input type="text"
+                       id="PhoneNumber"
+                       name="phone"
+                       lay-verify="phone"
+                       autocomplete="off"
+                       class="layui-input"
+                       value="@Model.PhoneNumber">
+            </div>
+        </div>*@
+            <div class="layui-form-item">
+                <label for="@(nameof(Model.PassWord))" class="layui-form-label">
+                    @L["Password"]
+                </label>
+                <div class="layui-input-inline">
+                    <input type="password"
+                           id="@(nameof(Model.PassWord))"
+                           name="@(nameof(Model.PassWord))"
+                           required=""
+                           lay-verify="pass"
+                           autocomplete="off"
+                           class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">@L["{0}to{1}characters", 8, 20]</div>
+            </div>
+            <div class="layui-form-item">
+                <label for="@(nameof(Model.ConfirmPassword))" class="layui-form-label">
+                    @L["ConfirmPassword"]
+                </label>
+                <div class="layui-input-inline">
+                    <input type="password"
+                           id="@(nameof(Model.ConfirmPassword))"
+                           name="@(nameof(Model.ConfirmPassword))"
+                           required=""
+                           lay-verify="repass"
+                           autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            @await Component.InvokeAsync("LayuiFormOption")
+            @*<div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="save">@L["Submit"]</button>
+                <button type="reset" class="layui-btn layui-btn-primary">@L["Reset"]</button>
+            </div>
+        </div>*@
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        layui.use(['form', 'layer'],
+            function () {
+                let form = layui.form,
+                    layer = layui.layer;
+
+                //监听提交
+                form.on('submit(save)',
+                    function (data) {
+                        let fields = data.field;
+                        request.ajax({
+                            url: "/identity/user/edit",
+                            data: fields,
+                            type: "post",
+                            success: function (res) {
+                                if (reponse.reponse_validate(res)) {
+                                    prompt.success('@L["OperationSuccessful"]',
+                                        function (index) {
+                                        hg.base_reload();
+                                    });
+                                }
+                            }
+                        });
+                        return false;
+                    });
+            });
+    </script>
+}
+

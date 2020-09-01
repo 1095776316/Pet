@@ -1,0 +1,161 @@
+﻿
+@{
+    ViewData["Title"] = "操作员管理";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="layui-card">
+    <div class="layui-card-header">
+        <div class="layui-form">
+            <div class="layui-form-item ">
+                <div class="layui-inline"><i class="fa fa-file-text-o fa-fw"></i> @ViewBag.Title</div>
+            </div>
+            <div class="layui-form-item layui-layout-left">
+                <div class="layui-inline">
+                    <input class="layui-input layui-input-sm" style="width: 300px;" type="text" name="search" placeholder="快速查找" autocomplete="off">
+                </div>
+                <div class="layui-inline layui-show-xs-block">
+                    <button class="layui-btn layui-btn-sm layui-btn-normal" lay-submit lay-filter="querysubmit">
+                        <i class="layui-icon layui-icon-sm">&#xe615;</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-card-body">
+        <table class="layui-hide" id="test" lay-filter="test"></table>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        //监听表单提交事件
+        hg.form.onsubmit('querysubmit', function (data) {
+            table && table.reload(data);
+        });
+        var tableCols = [[
+            { type: 'checkbox' },
+            {
+                field: 'id',
+                width: 260,
+                title: '@L["Number"]',
+                sort: true
+            }, {
+                field: 'name',
+                width: 200,
+                title: '@L["Account"]'
+            }, {
+                field: 'nickName',
+                width: 200,
+                title: '@L["NickName"]'
+            }, {
+                field: 'creationTime',
+                title: '@L["CreationTime"]',
+                width: 200,
+                sort: true,
+                templet: function (d) {
+                    return layui.util.toDateString(d.enrollmentDT, "yyyy-MM-dd HH:mm:ss");
+                }
+            }, {
+                field: 'activedDesc',
+                title: '@L["Actived"]',
+                minWidth: 120,
+                sort: true
+            }, {
+                field: 'userTypeDesc',
+                title: '@L["UserTypeDesc"]',
+                minWidth: 120,
+                sort: true
+            }, {
+                field: 'right',
+                minWidth: 160,
+                title: '@L["Operate"]',
+                fixed: 'right',
+                templet: function (d) {
+                    return '<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">编辑</a> <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>'
+                }
+            }]
+        ];
+        //通过行tool编辑，lay-event="edit"
+        function edit(obj) {
+            if (obj.data.id) {
+                hg.open('@L["Edit"]', '/Identity/User/Edit/' + obj.data.id, 700, 500);
+            }
+        }
+        //通过行tool删除，lay-event="del"
+        function del(obj) {
+            if (obj.data.id) {
+                hg.confirm("账户：" + obj.data.name + "，确定要删除吗？", function () {
+                   request.ajax({
+                            url: "/Identity/User/Delete",
+                            data: { id: obj.data.id },
+                            type: "post",
+                            success: function (res) {
+                                if (reponse.reponse_validate(res)) {
+                                        prompt.success('@L["OperationSuccessful"]',
+                                        function (index) {
+                                         obj.del(); //只删本地数据
+                                    });
+                                }
+                            }
+                        });
+                });
+            }
+        }
+
+        var toolbar = [{
+            text: '@L["Add"]',
+            layuiicon: '&#xe608;',
+            class: 'layui-btn-normal',
+            handler: function () {
+                hg.open('添加账户', '/Identity/User/Add', 600, 480);
+            }
+        },
+            {
+            text: '@L["BatchDelete"]',
+            layuiicon: '&#xe640;',
+            class: 'layui-btn-danger',
+            handler: function (obj, row) {
+                if (obj.checkstatus && obj.checkstatus.data.length > 0) {
+                    let ids = obj.checkstatus.data.map(item => {
+                        return item.id
+                    });
+
+                    hg.confirm("批量删除当前所有选中的用户，确定要删除吗？", function () {
+                         request.ajax({
+                            url: "/Identity/User/BatchDelete",
+                             data: { ids:ids },
+                            type: "post",
+                            success: function (res) {
+                                if (reponse.reponse_validate(res)) {
+                                        prompt.success('@L["OperationSuccessful"]',
+                                        function (index) {
+                                            $(".layui-table-view[lay-id='test'] .layui-form-checked").not('.header').parents('tr').remove();//只删本地数据
+                                            hg.table.datatable('test', 'reload');
+                                    });
+                                }
+                            }
+                        });
+                    });
+                } else {
+                    hg.msg('请选中一个或多个复选框，再操作！');
+                }
+            }
+        }
+        ];
+
+        //基本数据表格
+        var table = hg.table.datatable(
+            'test',
+            '账户管理',
+            '/Identity/User/GetQueryList',
+            {},
+            tableCols,
+            toolbar,
+            true,
+            'full-100',
+            ['filter', 'print', 'exports'],
+            true
+        );
+    </script>
+}
